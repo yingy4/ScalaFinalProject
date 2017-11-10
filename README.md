@@ -1,7 +1,7 @@
-# ScalaFinalProject :: EHR
+# ScalaFinalProject :: Airline Trends: Prices and Passengers
 
-The problem at hand is the amount of backlog and inefficiencies in the healthcare system at the moment. Consultation backlog and lapses in diagnoses are a real problem in this day and age which lead to a lot of people receiving ill advised medical care or none at all.
+The travel industry is a multi-billion dollar industry, with quite rapidly fluctating prices and uncertainity. This can be quite frustrating from a consumer point of view, especially during peak seasons. Presently, the airline is consolidated with just a few major key players that allow them to fluctuate the prices at will.
 
-What we propose is to build a system which would create a network of hospitals, in an area, with a centralised database of information relating to patients and their medical history, hospital visits and medical track record, and to analyze that data to make the in place system more effective. We also want to create a client which would be able to predict patient trends, disease patterns and provide the doctor or physian with more information regarding the problem at hand but also about similar diseases and trends in the area. This would give the consulting physician more information to make an informed decision. 
+We plan to analyze the past trends in the fickle industry and try to provide future predictions of how the prices will vary over days and weeks. We also plan to analyze the travelling patterns of people, especially during the holiday season and check how the industry also float their prices in response to the overwhelming number of people who travel.
 
-In addition to that, design the client to create consultations bookings or reminders on behalf of the patients to create a system which is effective, reduces errors and that works for both patients and doctors.
+In addition to the above analysis, we plan to provide a web UI which can act like a dashboard of aggregated results and provide recommnedations to the customer on when and which flight to book.
