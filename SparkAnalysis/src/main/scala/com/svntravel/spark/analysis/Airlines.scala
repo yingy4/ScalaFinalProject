@@ -1,21 +1,9 @@
 package com.svntravel.spark.analysis
 
-import org.apache.spark.sql.{SparkSession}
-
-
-
 case class Ticket (itinId: BigInt, year: Int, quarter: Int, origin: String, destination: String, roundTrip: Double, fare: Double, miles: Double, tktCarrier: String, opCarrier: String)
 
 
 object Airlines extends App {
-
-  implicit val spark = SparkSession
-    .builder()
-    .appName("Airlines")
-    .master("local[*]")
-    .getOrCreate()
-
-  import spark.implicits._
 
   import SQL._
 
