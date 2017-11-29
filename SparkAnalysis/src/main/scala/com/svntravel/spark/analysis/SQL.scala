@@ -5,13 +5,7 @@ import org.apache.spark.sql.functions._
 
 object SQL {
 
-  def readCSV (fileURI: String): DataFrame = {
-    implicit val spark = SparkSession
-      .builder()
-      .appName("Airlines")
-      .master("local[*]")
-      .getOrCreate()
-
+  def readCSV (fileURI: String, spark: SparkSession): DataFrame = {
     spark.read.option("header", "true").option("inferSchema", "true").csv(fileURI)
   }
 
