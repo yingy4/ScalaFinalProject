@@ -10,6 +10,7 @@ import play.api.mvc._
 @Singleton
 class AmadeusController @Inject() (cc :ControllerComponents) (ws: WSClient) extends AbstractController(cc){
   import scala.concurrent.ExecutionContext.Implicits._
+
   val url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search"
 
   def cheapFlights (src: String, des: String) = Action.async {
