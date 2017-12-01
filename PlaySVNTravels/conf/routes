@@ -3,7 +3,7 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# An example controller showing a sample home page
+#Home
 GET     /                           controllers.HomeController.index
 
 #Amadeus
