@@ -9,6 +9,8 @@ GET     /                           controllers.HomeController.index
 #Amadeus
 GET /cheapflights/:src/:des        controllers.AmadeusController.cheapFlights(src: String, des: String)
 
+GET /ws                            controllers.APIController.websocket
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
