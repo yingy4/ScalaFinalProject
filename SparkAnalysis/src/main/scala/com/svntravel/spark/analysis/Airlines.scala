@@ -1,9 +1,11 @@
 package com.svntravel.spark.analysis
 
+import it.nerdammer.spark.hbase.rddToHBaseBuilder
 import org.apache.spark.sql.SparkSession
 
 case class Ticket (itinId: BigInt, year: Int, quarter: Int, origin: String, destination: String, roundTrip: Double, fare: Double, miles: Double, tktCarrier: String, opCarrier: String)
 
+case class Locations (year: Int, quarter: Int, origin: String, destination: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double)
 
 object Airlines extends App {
 
@@ -37,8 +39,21 @@ object Airlines extends App {
 
   import Aggregation._
 
-  aggAvgFarePerLocation(ticketDsArr).write.format("csv")
+  val locationsDsArr = locationAggregates(ticketDsArr).map (l => Locations.create(l.getInt(0), l.getInt(1), l.getString(2), l.getString(3), l.getDouble(4), l.getDouble(5), l.getDouble(6), l.getDouble(7)))
+
+  locationsDsArr.write.format("com.databricks.spark.csv").save("locations")
+
 }
+
+object Locations {
+  def create(year: Int, quarter: Int, origin: String, destination: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double): Locations = {
+    if (!stdDev.isNaN()) new Locations(year, quarter, origin, destination, minPrice, maxPrice, avgPrice, stdDev)
+    else new Locations(year, quarter, origin, destination, minPrice, maxPrice, avgPrice, 0.0)
+  }
+
+}
+
+
 
 
 
