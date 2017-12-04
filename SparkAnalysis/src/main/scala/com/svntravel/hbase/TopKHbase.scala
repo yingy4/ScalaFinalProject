@@ -23,7 +23,7 @@ object TopKHbase {
 
     val put = new Put(Bytes.toBytes(route.origin + " - " + route.destination))
     put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("origin"), Bytes.toBytes(route.origin))
-    put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("origin"), Bytes.toBytes(route.destination))
+    put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("destination"), Bytes.toBytes(route.destination))
     put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("count"), Bytes.toBytes(route.count.toString))
     table.put(put)
   }
@@ -77,7 +77,7 @@ object TopKHbase {
   def putTopOperatingCarrierData (oc: OperatingCarrier, table: Table, cf: String) : Unit = {
 
     val put = new Put(Bytes.toBytes(oc.carrierCode))
-    put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("destination"), Bytes.toBytes(oc.carrierCode))
+    put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("OperatingCarrier"), Bytes.toBytes(oc.carrierCode))
     put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("count"), Bytes.toBytes(oc.count.toString))
     table.put(put)
   }
@@ -95,7 +95,7 @@ object TopKHbase {
   def putTopTicketingCarrierData (tc: TicketingCarrier, table: Table, cf: String) : Unit = {
 
     val put = new Put(Bytes.toBytes(tc.carrierCode))
-    put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("destination"), Bytes.toBytes(tc.carrierCode))
+    put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("TicketingCarrier"), Bytes.toBytes(tc.carrierCode))
     put.addColumn(Bytes.toBytes(cf), Bytes.toBytes("count"), Bytes.toBytes(tc.count.toString))
     table.put(put)
   }

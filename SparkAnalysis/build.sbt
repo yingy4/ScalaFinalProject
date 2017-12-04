@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   "org.apache.hadoop" % "hadoop-mapred" % "0.22.0",
   "org.apache.hbase" % "hbase-common" % "1.0.0",
   "org.apache.hbase" % "hbase-client" % "1.0.0",
-  "org.apache.hbase" % "hbase-server" % "1.0.0"
+  "org.apache.hbase" % "hbase-server" % "1.0.0",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
 
 dependencyOverrides += "com.google.guava" % "guava" % "15.0"

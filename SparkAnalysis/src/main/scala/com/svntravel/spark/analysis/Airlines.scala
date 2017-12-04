@@ -6,6 +6,7 @@ import com.svntravel.hbase.TopKHbase._
 import Aggregation._
 import com.svntravel.spark.analysis.Airlines.spark
 
+
 case class Ticket (itinId: BigInt, year: Int, quarter: Int, origin: String, destination: String, roundTrip: Double, fare: Double, miles: Double, tktCarrier: String, opCarrier: String)
 
 case class Location (year: Int, quarter: Int, origin: String, destination: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double)
@@ -19,6 +20,8 @@ case class Destination (destination: String, count: Long)
 case class OperatingCarrier (carrierCode: String, count: Long)
 
 case class TicketingCarrier (carrierCode: String, count: Long)
+
+case class Carrier (carrierCode: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double)
 
 object Airlines extends App {
 
@@ -114,6 +117,19 @@ object TicketingCarrier {
     import spark.implicits._
     val ticketingCarrierDsArr = findTopTicketingCarrier(dst, k).map(tc => TicketingCarrier(tc.getString(2), tc.getLong(3)))
     addTopTicketingCarrierToHbase(ticketingCarrierDsArr, cf)
+  }
+
+}
+
+object Carrier {
+  import com.svntravel.hbase.CarrierHbase._
+
+  def create(carrierCode: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double): Carrier = new Carrier(carrierCode, minPrice, maxPrice, avgPrice, stdDev match { case x if x.isNaN() => 0.0; case _ => stdDev})
+
+  def aggCarrier (dst: Dataset[Ticket], cf:String): Unit = {
+    import spark.implicits._
+    val carrierDsArr = carrierAggregates(dst).map(c => Carrier(c.getString(0), c.getDouble(1), c.getDouble(2), c.getDouble(3), c.getDouble(4)))
+    addCarrierstoHbase(carrierDsArr,cf)
   }
 
 }

@@ -8,7 +8,7 @@ import org.apache.hadoop.hbase.client._
 
 object HbaseConf {
 
-
+  //create a hbase connection
   def createConncetion (): Connection = {
     val conf = HBaseConfiguration.create()
     val conn = ConnectionFactory.createConnection(conf)
@@ -16,12 +16,14 @@ object HbaseConf {
     conn
   }
 
+  //close the connection
   def closeConnections (connection: Connection, table: Table) : Unit = {
     table.close()
     connection.close()
     println("Closed Connection")
   }
 
+  //print rows of the result. not used now
   def printRow(result : Result) = {
     val cells = result.rawCells()
     print( Bytes.toString(result.getRow) + " : " )
