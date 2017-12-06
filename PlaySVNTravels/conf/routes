@@ -10,6 +10,12 @@ GET      /                           controllers.PlayJsonController.cJson
 #Amadeus
 GET /cheapflights/:src/:des        controllers.AmadeusController.cheapFlights(src: String, des: String)
 
+GET /inspireme/:src                controllers.AmadeusController.inspirationSearch(src: String)
+
+GET /cheapest/:src/:des            controllers.AmadeusController.destinationAgrregation(src: String, des: String)
+
+GET /cheapestoneway/:src/:des      controllers.AmadeusController.destinationAgrregationOneWay(src: String, des: String)
+
 GET /ws                            controllers.APIController.websocket
 
 # Map static resources from the /public folder to the /assets URL path
