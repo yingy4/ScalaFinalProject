@@ -4,8 +4,8 @@
 # ~~~~
 
 #Home
-#GET     /                           controllers.HomeController.index
-GET      /                           controllers.PlayJsonController.cJson
+GET     /                           controllers.HomeController.index
+#GET      /                           controllers.PlayJsonController.cJson
 
 #Amadeus
 GET /cheapflights/:src/:des        controllers.AmadeusController.cheapFlights(src: String, des: String)
