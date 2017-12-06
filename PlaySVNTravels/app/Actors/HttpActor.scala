@@ -29,16 +29,24 @@ class HttpActor(out:ActorRef) extends Actor with ActorLogging{
 
   override def receive: Receive = {
     case msg:String =>
-      val inputArray = msg.split("\\*")
       val kafkaActor = kafaSystem.actorOf(Props[KafkaActor])
-      out ! ("I received your message: " + inputArray(0))
+      if(!msg.contains("\\*")){
+        http.singleRequest(HttpRequest(uri = s"http://localhost:9000/inspireme/${msg}")).onComplete(response =>
+          response.get.entity.dataBytes.runFold(ByteString(""))(_ ++ _).foreach {
+            body => kafkaActor ! body.utf8String
+          }
+        )
+      }else{
+        val inputArray = msg.split("\\*")
+        out ! ("I received your message: " + inputArray(0))
+        // Creates HTTP Request and unwraps HttPResponse to get the response json as string
+        http.singleRequest(HttpRequest(uri = s"http://localhost:9000/cheapflights/${inputArray(0)}/${inputArray(1)}")).onComplete(response =>
+          response.get.entity.dataBytes.runFold(ByteString(""))(_ ++ _).foreach {
+            body => kafkaActor ! body.utf8String
+          }
+        )
+      }
 
-      // Creates HTTP Request and unwraps HttPResponse to get the response json as string
-      http.singleRequest(HttpRequest(uri = s"http://localhost:9000/cheapflights/${inputArray(0)}/${inputArray(1)}")).onComplete(response =>
-        response.get.entity.dataBytes.runFold(ByteString(""))(_ ++ _).foreach {
-          body => kafkaActor ! body.utf8String
-        }
-      )
   }
 
 }
