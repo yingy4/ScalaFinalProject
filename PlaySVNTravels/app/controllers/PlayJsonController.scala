@@ -1,9 +1,10 @@
+//TODO:: Remove this before final submission
 package controllers
 
 import javax.inject.Inject
 
 import play.api.libs.functional.syntax._
-import play.api.libs.json.{JsPath, Json, Reads}
+import play.api.libs.json.{JsPath, Json, Reads, Writes}
 import play.api.mvc.{AbstractController, ControllerComponents}
 
 import scala.concurrent.ExecutionContext
@@ -46,6 +47,55 @@ class PlayJsonController @Inject()(cc: ControllerComponents) (implicit ec: Execu
     (JsPath \ "currency").read[String] and
       (JsPath \ "results").read[List[FlightResults]]
   ) (CheapFlights.apply _)
+
+  implicit val airTerminalWrites = new Writes[AirTerminal]{
+    def writes(terminal: AirTerminal) = Json.obj(
+      "airport" -> terminal.airport
+    )
+  }
+
+  implicit val flightWrites = new Writes[Flight]{
+    def writes(flight:Flight) = Json.obj(
+      "origin" -> flight.origin,
+      "destination" -> flight.destination
+    )
+  }
+
+  implicit val inOutBoundWrites = new Writes[InOutbound]{
+    def writes(inout:InOutbound) = Json.obj(
+      "flights" -> inout.flights
+    )
+  }
+
+  implicit val intenrariesWrites = new Writes[Itineraries]{
+    def writes(itinerary:Itineraries) = Json.obj(
+      "outbound" -> itinerary.outbound,
+      "inbound" -> itinerary.inbound
+    )
+  }
+
+  implicit val farWrites = new Writes[Fare]{
+    def writes(fare:Fare) = Json.obj(
+      "total_price" -> fare.total_price
+    )
+  }
+
+  implicit val flightResultsWrites = new Writes[FlightResults]{
+    def writes(flightResults:FlightResults) = Json.obj(
+      "itineraries" -> flightResults.itineraries,
+      "fare" -> flightResults.fare
+    )
+  }
+
+  implicit val cheapFlightsWriest = new Writes[CheapFlights]{
+    def writes(cheapFlights:CheapFlights) = Json.obj(
+      "currency" -> cheapFlights.currency,
+      "result" -> cheapFlights.results
+    )
+  }
+
+
+
 
   def cJson = Action {
 
@@ -233,9 +283,12 @@ class PlayJsonController @Inject()(cc: ControllerComponents) (implicit ec: Execu
 
    val jsonStream = Json.parse(inStream)
    val cheapFlights = jsonStream.as[CheapFlights]
+   val flightResults = cheapFlights.results
 
-   println(cheapFlights.currency)
-    cheapFlights.results.foreach(f => println(f.fare.total_price) )
+    val json = Json.toJson(flightResults)
+
+   println(json.toString())
+    //cheapFlights.results.foreach(f => println(f.fare.total_price) )
    // places.residents.foreach(f => println(s"${f.name}") )
 
     Ok("Done")
