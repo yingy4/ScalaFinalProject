@@ -6070,7 +6070,7 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#template-resolver;0.1!template-resolver.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#jline;2.10.6!jline.jar
 [debug] 	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar
-[debug] :: resolution report :: resolve 3055ms :: artifacts dl 75ms
+[debug] :: resolution report :: resolve 1563ms :: artifacts dl 38ms
 [debug] 	report for default#sparkanalysis-build;0.1-SNAPSHOT compile produced in /Users/saravandeepak/SCALA/ScalaFinalProject/SparkAnalysis/project/target/scala-2.10/sbt-0.13/resolution-cache/reports/default-sparkanalysis-build-compile.xml
 [debug] 	report for default#sparkanalysis-build;0.1-SNAPSHOT runtime produced in /Users/saravandeepak/SCALA/ScalaFinalProject/SparkAnalysis/project/target/scala-2.10/sbt-0.13/resolution-cache/reports/default-sparkanalysis-build-runtime.xml
 [debug] 	report for default#sparkanalysis-build;0.1-SNAPSHOT test produced in /Users/saravandeepak/SCALA/ScalaFinalProject/SparkAnalysis/project/target/scala-2.10/sbt-0.13/resolution-cache/reports/default-sparkanalysis-build-test.xml
@@ -6084,5 +6084,5 @@
 [debug] 	report for default#sparkanalysis-build;0.1-SNAPSHOT docs produced in /Users/saravandeepak/SCALA/ScalaFinalProject/SparkAnalysis/project/target/scala-2.10/sbt-0.13/resolution-cache/reports/default-sparkanalysis-build-docs.xml
 [debug] 	report for default#sparkanalysis-build;0.1-SNAPSHOT pom produced in /Users/saravandeepak/SCALA/ScalaFinalProject/SparkAnalysis/project/target/scala-2.10/sbt-0.13/resolution-cache/reports/default-sparkanalysis-build-pom.xml
 [debug] 	report for default#sparkanalysis-build;0.1-SNAPSHOT scala-tool produced in /Users/saravandeepak/SCALA/ScalaFinalProject/SparkAnalysis/project/target/scala-2.10/sbt-0.13/resolution-cache/reports/default-sparkanalysis-build-scala-tool.xml
-[debug] 	resolve done (3055ms resolve - 75ms download)
+[debug] 	resolve done (1563ms resolve - 38ms download)
 [info] Done updating.

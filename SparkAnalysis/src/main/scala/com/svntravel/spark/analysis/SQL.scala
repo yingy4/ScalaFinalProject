@@ -64,6 +64,18 @@ object Aggregation {
       )
   }
 
+  def topCarrierPerLocation (ds: Dataset[Ticket]) : DataFrame = {
+    ds.select("year", "quarter", "origin", "destination", "opCarrier", "fare")
+        .groupBy("year", "quarter", "origin", "destination", "opCarrier")
+            .agg(
+              count("opCarrier").as("count")
+//              ,min("fare").as("minFare")
+//              ,max("fare").as("maxFare")
+//              ,avg("fare").as("avgFare")
+            )
+            .orderBy(desc("count"))
+  }
+
   //get top routes for a quarter
   def findTopRoutes (ds: Dataset[Ticket], k: Int) : DataFrame = {
     ds.select("year", "quarter", "origin", "destination").groupBy("year", "quarter", "origin", "destination")
