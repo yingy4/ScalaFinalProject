@@ -5,7 +5,8 @@ import org.apache.spark.SparkConf
 import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import play.api.libs.functional.syntax._
-import play.api.libs.json.{JsPath, Json, Reads}
+import play.api.libs.json.{JsPath, Json,Reads}
+
 
 
 case class AirTerminal(airport: String)
@@ -68,19 +69,27 @@ object MessageStreamingUtils{
       ssc,
       LocationStrategies.PreferConsistent,
       ConsumerStrategies.Subscribe[String, String](topics, kafkaParams)).map {
-      record => (record.key, record.value)
-    } foreachRDD(
-      rdd => {
-        val msg = rdd.collect()
-        msg.foreach{
-          case (a,b) => val cf = Json.parse(b).as[CheapFlights]
-            cf.results.foreach(f => println(f.fare.total_price))
-        }
-      }
-    )
+      record => Json.parse(record.value()).as[CheapFlights]
+    }.flatMap(ProcessCheapFlightStream.ReduceCheapFlightToTen(_ , 10))
 
+    cheapFlightsStream.foreachRDD( rdd => {
+      val msg = rdd.collect()
+      //--- Push to Kafa then to UI ----//
+      //TODO
+    }
+    )
 
     ssc.start()
     ssc.awaitTermination()
   }
+}
+
+
+object ProcessCheapFlightStream{
+    def ReduceCheapFlightToTen(cfs: CheapFlights, n: Int) = {
+      if(n < cfs.results.length)
+        cfs.results.sortBy( r => r.fare ).take(n)
+      else
+        cfs.results.sortBy( r => r.fare )
+    }
 }
