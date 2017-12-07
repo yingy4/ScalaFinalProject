@@ -7,6 +7,13 @@ import play.api.libs.json.{Json, Writes}
   */
 object MessagePushingUtils{
 
+  implicit val bookingInfoWrites = new Writes[BookingInfo]{
+    def writes(bookingInfo:BookingInfo) = Json.obj(
+      "travel_class" -> bookingInfo.travel_class,
+      "seats_remaining" -> bookingInfo.seats_remaining
+    )
+  }
+
   implicit val airTerminalWrites = new Writes[AirTerminal]{
       def writes(terminal: AirTerminal) = Json.obj(
         "airport" -> terminal.airport
@@ -16,7 +23,9 @@ object MessagePushingUtils{
   implicit val flightWrites = new Writes[Flight]{
       def writes(flight:Flight) = Json.obj(
         "origin" -> flight.origin,
-        "destination" -> flight.destination
+        "destination" -> flight.destination,
+        "marketing_airline" -> flight.marketing_airline,
+        "booking_info" -> flight.booking_info
       )
   }
 
@@ -33,7 +42,7 @@ object MessagePushingUtils{
       )
   }
 
-  implicit val farWrites = new Writes[Fare]{
+  implicit val fareWrites = new Writes[Fare]{
       def writes(fare:Fare) = Json.obj(
         "total_price" -> fare.total_price
       )
