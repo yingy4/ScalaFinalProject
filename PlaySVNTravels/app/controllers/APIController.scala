@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject._
 
-import Actors.HttpActor
+import Actors.{HttpActor, UserRequest}
 import akka.actor.ActorSystem
 import akka.stream.Materializer
 import akka.util.Timeout
@@ -41,9 +41,17 @@ class APIController @Inject() (cc :ControllerComponents)
     */
 
 
-  def websocket = WebSocket.accept[String,String]{ request =>
+  def websocket(src:String,dest:String) = WebSocket.accept[String,String]{ request =>
+    println(src)
     ActorFlow.actorRef { out =>
-      HttpActor.props(out)
+      HttpActor.props(out)(src,dest)
+    }
+  }
+
+  def websocketDestinationAgrregation(src:String,des:String) = WebSocket.accept[String,String]{ request =>
+    println(src)
+    ActorFlow.actorRef {
+      out =>HttpActor.props(out)(src,des)
     }
   }
 
