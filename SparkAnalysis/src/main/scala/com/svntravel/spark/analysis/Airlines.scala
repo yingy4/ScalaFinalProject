@@ -21,7 +21,9 @@ case class OperatingCarrier (carrierCode: String, count: Long)
 
 case class TicketingCarrier (carrierCode: String, count: Long)
 
-case class Carrier (carrierCode: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double)
+case class Carrier (year: Int, quarter: Int, carrierCode: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double)
+
+case class LocationCarrierAgg (year: Int, quarter: Int, origin: String, destination: String, carrierCode: String, count: Long)
 
 object Airlines extends App {
 
@@ -57,10 +59,24 @@ object Airlines extends App {
 //
 //  aggLocations(ticketDsArr, "2017Q1")
 
-  import Routes._
 
-  aggRoutes(ticketDsArr, 100, "2017Q1")
+//  Routes.aggRoutes(ticketDsArr, 100, "2017Q1")
+//
+//  Origin.aggOrigin(ticketDsArr, 100, "2017Q1")
+//
+//  Destination.aggDestination(ticketDsArr, 100, "2017Q1")
+//
+//  OperatingCarrier.aggOperatingCarrier(ticketDsArr, 25, "2017Q1")
+//
+//  TicketingCarrier.aggTicketingCarrier(ticketDsArr, 25, "2017Q1")
 
+//  Carrier.aggCarrier(ticketDsArr, "2017Q1")
+
+//  LocationCarrierAgg.aggCarrierForLocation(ticketDsArr, "2017Q1")
+
+//  topCarrierPerLocation(ticketDsArr).show(1000)
+  
+//  println(topCarrierPerLocation(ticketDsArr).count())
 
 }
 
@@ -124,14 +140,23 @@ object TicketingCarrier {
 object Carrier {
   import com.svntravel.hbase.CarrierHbase._
 
-  def create(carrierCode: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double): Carrier = new Carrier(carrierCode, minPrice, maxPrice, avgPrice, stdDev match { case x if x.isNaN() => 0.0; case _ => stdDev})
+  def create(year: Int, quarter: Int, carrierCode: String, minPrice: Double, maxPrice: Double, avgPrice: Double, stdDev: Double): Carrier = new Carrier(year, quarter, carrierCode, minPrice, maxPrice, avgPrice, stdDev match { case x if x.isNaN() => 0.0; case _ => stdDev})
 
   def aggCarrier (dst: Dataset[Ticket], cf:String): Unit = {
     import spark.implicits._
-    val carrierDsArr = carrierAggregates(dst).map(c => Carrier(c.getString(0), c.getDouble(1), c.getDouble(2), c.getDouble(3), c.getDouble(4)))
-    addCarrierstoHbase(carrierDsArr,cf)
+    val carrierDsArr = carrierAggregates(dst).map(c => Carrier(c.getInt(0), c.getInt(1), c.getString(2), c.getDouble(3), c.getDouble(4), c.getDouble(5), c.getDouble(6)))
+    addCarrierstoHbase(carrierDsArr, cf)
   }
 
+}
+
+object LocationCarrierAgg {
+
+  def aggCarrierForLocation (dst: Dataset[Ticket], cf: String): Unit = {
+    import spark.implicits._
+    val carrierLocationDsArr = topCarrierPerLocation(dst).map(cl => LocationCarrierAgg(cl.getInt(0),cl.getInt(1), cl.getString(2), cl.getString(3), cl.getString(4), cl.getLong(5)))
+    addTopCarrierPerLocationtoHbase(carrierLocationDsArr, cf)
+  }
 }
 
 
