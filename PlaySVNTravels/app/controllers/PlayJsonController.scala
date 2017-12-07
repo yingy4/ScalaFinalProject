@@ -96,7 +96,6 @@ class PlayJsonController @Inject()(cc: ControllerComponents) (implicit ec: Execu
 
 
 
-
   def cJson = Action {
 
     val inStream = """{
@@ -295,3 +294,4 @@ class PlayJsonController @Inject()(cc: ControllerComponents) (implicit ec: Execu
   }
 
 }
+
