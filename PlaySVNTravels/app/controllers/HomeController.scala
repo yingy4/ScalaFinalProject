@@ -1,11 +1,11 @@
 package controllers
 
 import javax.inject._
-import utils.MessageStreamingUtils
+
 import play.api.mvc._
+import spark.StreamingCheapFlights
 
 import scala.concurrent.{ExecutionContext, Future}
-
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -21,10 +21,8 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit ec: Execution
    * a path of `/`.
    */
   def index = Action {
-
-    val abc = Future{MessageStreamingUtils.streamUtil}
+    val abc = Future{ new StreamingCheapFlights}
     Ok(views.html.index(s"Your new application is ready. Your message:"))
-
   }
 
 }
