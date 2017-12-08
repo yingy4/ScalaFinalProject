@@ -8,6 +8,9 @@ import scala.util.Try
 
 case class LocationsAgg (origin: String, destination: String, maxFare: Double, minFare: Double, avgFare: Double, stdDev: Double, period: String)
 
+case class TopCarriers (carrierCode: String, count: Long)
+case class LocationCarrierAgg (origin: String, destination: String, carrierCode: scala.collection.mutable.Set[TopCarriers])
+
 object LocationsHbase {
 
   def getLocationsAgg(src: String, des: String, cf : String): Try[LocationsAgg] = {
@@ -35,4 +38,26 @@ object LocationsHbase {
 
   }
 
+  def getTopCarrierPerLocationData(src: String, des: String, cf: String ): LocationCarrierAgg = {
+    val conn  = HbaseConf.createConncetion()
+    val table = conn.getTable(TableName.valueOf( Bytes.toBytes("topCarrierPerLocation")))
+    var get = new Get(Bytes.toBytes(src + " - " + des))
+    var result = table.get(get)
+    HbaseConf.closeConnections(conn, table)
+    import org.apache.hadoop.hbase.util.Bytes
+    val familyMap = result.getFamilyMap(Bytes.toBytes(cf))
+
+    //var carriers :Seq[(String, Long)] = Seq.empty[(String, Long)]
+
+    import collection.JavaConversions._
+    val topCarriersArr = familyMap.keySet().map( key => TopCarriers(Bytes.toString(key), Bytes.toString(familyMap.get(key)).toLong))
+
+    LocationCarrierAgg.apply(src, des, topCarriersArr)
+
+  }
+
+
+
 }
+
+
