@@ -19,10 +19,14 @@ GET /cheapestoneway/:src/:des      controllers.AmadeusController.destinationAgrr
 
 GET /ws/:src/:dest                 controllers.APIController.websocket(src:String,dest:String)
 
+
 GET /aggregate/:src/               controllers.APIController.websocketDestinationAgrregation(src:String,des:String)
 
 #Hbase
-GET /hbase/:src/:des                controllers.HbaseController.getLocationsData(src: String, des: String)
+GET /hbase/:src/:des               controllers.HbaseController.getLocationsData(src: String, des: String)
+
+GET /wshbase/:src/:dest            controllers.HbaseController.websocket(src:String,dest:String)
+
 
 
 # Map static resources from the /public folder to the /assets URL path
