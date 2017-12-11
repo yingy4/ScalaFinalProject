@@ -4,6 +4,7 @@ import javax.inject._
 
 import play.api.libs.ws.WSClient
 import play.api.mvc._
+import play.api.Logger
 
 
 
@@ -14,6 +15,7 @@ class AmadeusController @Inject() (cc :ControllerComponents) (ws: WSClient) exte
   val url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search"
 
   def cheapFlights (src: String, des: String) = Action.async {
+    Logger.info("in cheap flights controller action")
     ws.url(url).addQueryStringParameters("apikey" -> "Gbv5AzOeVWw2c0R3r2TBdA2SJA4kZkpB","origin" -> src,"destination" -> des, "departure_date" -> "2017-12-25").get().map { response =>
       Ok(response.body)
     }
@@ -29,6 +31,7 @@ class AmadeusController @Inject() (cc :ControllerComponents) (ws: WSClient) exte
 
   val inspirationURL = "https://api.sandbox.amadeus.com/v1.2/flights/inspiration-search"
   def inspirationSearch (src: String) = Action.async {
+    Logger.info("in inspiration search controller action")
     ws.url(inspirationURL).addQueryStringParameters("apikey" -> "Gbv5AzOeVWw2c0R3r2TBdA2SJA4kZkpB","origin" -> src).get().map { response =>
       Ok(response.body)
     }
@@ -43,6 +46,7 @@ class AmadeusController @Inject() (cc :ControllerComponents) (ws: WSClient) exte
 
   val aggregationURL = "https://api.sandbox.amadeus.com/v1.2/flights/extensive-search"
   def destinationAgrregation (src: String,des:String) = Action.async {
+    Logger.info("in two way aggregation controller action")
     ws.url(aggregationURL).addQueryStringParameters("apikey" -> "Gbv5AzOeVWw2c0R3r2TBdA2SJA4kZkpB","origin" -> src,"destination" -> des,"aggregation_mode" ->"DESTINATION").get().map { response =>
       Ok(response.body)
     }
@@ -50,6 +54,7 @@ class AmadeusController @Inject() (cc :ControllerComponents) (ws: WSClient) exte
 
   //For one way
   def destinationAgrregationOneWay (src: String,des:String) = Action.async {
+    Logger.info("in one way aggregation controller action")
     ws.url(aggregationURL).addQueryStringParameters("apikey" -> "Gbv5AzOeVWw2c0R3r2TBdA2SJA4kZkpB","origin" -> src,"destination" -> des,"one-way"->"true","aggregation_mode" ->"DESTINATION").get().map { response =>
       Ok(response.body)
     }

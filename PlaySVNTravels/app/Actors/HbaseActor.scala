@@ -4,6 +4,7 @@ import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props}
 import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
 import hbase.LocationsHbase._
 import play.api.libs.json.Json
+import play.api.Logger
 
 import scala.util.{Failure, Success}
 
@@ -18,11 +19,11 @@ class HbaseActor (out:ActorRef)(src:String,des:String) extends Actor with ActorL
 
   override def receive: Receive = {
     case "locations" =>
-      println("in hbase actor: Locations")
+      Logger.info("in hbase actor: Locations")
       out ! ("received params " + src + " " + des )
       hbaseApiActor ! LocationRequest(src, des , out)
     case "locationCarrier" =>
-      println("in hbase actor: Location Carrier")
+      Logger.info("in hbase actor: Location Carrier")
       out ! ("received params " + src + " " + des )
       hbaseApiActor ! LocationCarrierRequest(src, des, out)
   }
@@ -37,7 +38,7 @@ class HbaseApiActor extends Actor {
   import utils.HbaseJsonSerializer._
   override def receive:Receive = {
     case req:LocationRequest =>
-      println("in Hbase api actor: Locations")
+      Logger.info("in hbase actor: LocationRequest")
       val locations = getLocationsAgg(req.src, req.dest, "2017Q1")
       locations match {
         case Success(x) => req.sender ! Json.stringify(Json.toJson(x))
@@ -45,7 +46,7 @@ class HbaseApiActor extends Actor {
       }
 
     case req:LocationCarrierRequest =>
-      println("in Hbase api actor: Location Carrier")
+      Logger.info("in hbase actor: LocationCarrierRequest")
       val locationsCarrier = getTopCarrierPerLocationData(req.src, req.dest, "2017Q1")
       req.sender ! Json.stringify(Json.toJson(locationsCarrier))
 

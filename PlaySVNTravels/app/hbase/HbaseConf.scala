@@ -3,6 +3,7 @@ package hbase
 import org.apache.hadoop.hbase.{CellUtil, HBaseConfiguration}
 import org.apache.hadoop.hbase.client.{Connection, ConnectionFactory, Result, Table}
 import org.apache.hadoop.hbase.util.Bytes
+import play.api.Logger
 
 object HbaseConf {
 
@@ -10,7 +11,7 @@ object HbaseConf {
   def createConncetion (): Connection = {
     val conf = HBaseConfiguration.create()
     val conn = ConnectionFactory.createConnection(conf)
-    println("Successful connection")
+    Logger.info("Successful connection")
     conn
   }
 
@@ -18,7 +19,7 @@ object HbaseConf {
   def closeConnections (connection: Connection, table: Table) : Unit = {
     table.close()
     connection.close()
-    println("Closed Connection")
+    Logger.info("Closed connection")
   }
 
   //print rows of the result. not used now

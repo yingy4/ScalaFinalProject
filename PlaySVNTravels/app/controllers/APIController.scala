@@ -42,14 +42,12 @@ class APIController @Inject() (cc :ControllerComponents)
 
 
   def websocket(src:String,dest:String) = WebSocket.accept[String,String]{ request =>
-    println(src)
     ActorFlow.actorRef { out =>
       HttpActor.props(out)(src,dest)
     }
   }
 
   def websocketDestinationAgrregation(src:String,des:String) = WebSocket.accept[String,String]{ request =>
-    println(src)
     ActorFlow.actorRef {
       out =>HttpActor.props(out)(src,des)
     }

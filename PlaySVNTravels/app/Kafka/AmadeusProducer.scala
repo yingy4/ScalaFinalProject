@@ -4,7 +4,7 @@ package Kafka
 /***
   * The kafka producer application.
   */
-//TODO:: make it a general producer, to handle all API pushes to log?
+
 object AmadeusProducer{
   import java.util.Properties
 
