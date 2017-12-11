@@ -5,14 +5,19 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
 import akka.util.ByteString
+import play.api.Logger
+
+import scala.collection.mutable.HashMap
 
 
-case class UserRequest(src:String,dest:String,topic:String)
+case class UserRequest(src:String,dest:String,topic:String,outChannel:ActorRef)
 case class InpsiredUserRequest(src:String, topic:String,sender:ActorRef)
 case class AggregatedUserRequest(src:String,des:String,sender:ActorRef)
 
 object HttpActor{
+  var actorMap = HashMap.empty[String,ActorRef]
   def props(out:ActorRef)(src:String,des:String) = Props(new HttpActor(out)(src,des))
+  val system = ActorSystem("httpSystem")
 }
 
 
@@ -24,23 +29,22 @@ object HttpActor{
   */
 //TODO:: remove print statements, introduce logging?
 class HttpActor(out:ActorRef)(src:String,des:String) extends Actor with ActorLogging{
-
-  val system = ActorSystem("httpSystem")
+import HttpActor.system
 
   val apiActor = system.actorOf(Props[APIActor])
   override def receive: Receive = {
     case "two" =>
-      println("in normal case")
-      println(s"src = ${src}")
-      //val inputArray = msg.split("\\*")
-      out ! ("I received your message: " +src)
-      apiActor ! UserRequest(src,des,Kafka.AmadeusProducer.TOPIC)
+      Logger.debug("case two")
+      Logger.debug(s"Http Actor src =${src} and dest = ${des}")
+      HttpActor.actorMap.put("out",out)
+      apiActor ! UserRequest(src,des,Kafka.AmadeusProducer.TOPIC,out)
     case "one" =>
-      println("in tuple case")
-      out ! ("I received your message: " + des)
+      Logger.debug("case one")
+      Logger.debug(s"Http Actor src =${src}")
       apiActor ! InpsiredUserRequest(src,Kafka.AmadeusProducer.TOPIC,out)
     case "aggregate" =>
-      println("in aggregate case")
+      Logger.debug("case aggregate")
+      Logger.debug(s"Http Actor src =${src} and dest = ${des}")
       apiActor ! AggregatedUserRequest(src,des,out)
   }
 }
@@ -57,16 +61,17 @@ class APIActor extends Actor{
 
   override def receive: Receive = {
     case req:UserRequest =>
-      println("in api actor,case obj")
+      Logger.debug("case userRequest")
       val kafkaActor = system.actorOf(Props[KafkaActor])
 
       // Creates HTTP Request and unwraps HttPResponse to get the response json as string
       http.singleRequest(HttpRequest(uri = s"http://localhost:9000/cheapflights/${req.src}/${req.dest}")).onComplete(response =>
         response.get.entity.dataBytes.runFold(ByteString(""))(_ ++ _).foreach {
-          body => kafkaActor ! body.utf8String
+          body => kafkaActor ! (req.outChannel.path.toSerializationFormat,body.utf8String)
         }
       )
     case req:InpsiredUserRequest=>
+      Logger.debug("case InspiredUserRequest")
       val kafkaActor = system.actorOf(Props[KafkaActor])
 
       // Creates HTTP Request and unwraps HttPResponse to get the response json as string
@@ -76,6 +81,7 @@ class APIActor extends Actor{
         }
       )
     case req:AggregatedUserRequest=>
+      Logger.debug("case AggregatedUserRequest")
       val kafkaActor = system.actorOf(Props[KafkaActor])
 
       // Creates HTTP Request and unwraps HttPResponse to get the response json as string

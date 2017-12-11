@@ -8,6 +8,7 @@ import akka.stream.Materializer
 import play.api.libs.streams.ActorFlow
 import play.api.libs.ws.WSClient
 import play.api.mvc.{AbstractController, ControllerComponents, WebSocket}
+import play.api.Logger
 
 import scala.util.{Failure, Success}
 
@@ -28,7 +29,7 @@ class HbaseController @Inject() (cc :ControllerComponents)
   }
 
   def websocket(src:String,dest:String) = WebSocket.accept[String,String]{ request =>
-    println(src)
+    Logger.debug(s"hbase web socket : src = ${src} and des = ${dest}")
     ActorFlow.actorRef{ out =>
       HbaseActor.props(out)(src, dest)
     }
