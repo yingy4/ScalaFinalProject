@@ -137,9 +137,10 @@ object Filter {
   //filter the joined dataframes
   //remove unnecessary columns
   def filterDataset (df: DataFrame, couponDf: DataFrame, ticketsDF: DataFrame, marketDF: DataFrame, minFare: Double): DataFrame = {
-    df.select(couponDf("ITIN_ID"), couponDf("YEAR") , couponDf("QUARTER"), marketDF("ORIGIN"), marketDF("DEST"), ticketsDF("ROUNDTRIP"), ticketsDF("ITIN_FARE"), ticketsDF("DISTANCE"), marketDF("TICKET_CARRIER"), marketDF("OPERATING_CARRIER"))
+    df.select(couponDf("ITIN_ID"), couponDf("YEAR") , couponDf("QUARTER"), marketDF("ORIGIN"), marketDF("DEST"), ticketsDF("ROUNDTRIP"), marketDF("MARKET_FARE"), ticketsDF("DISTANCE"), marketDF("TICKET_CARRIER"), marketDF("OPERATING_CARRIER"))
       .where(marketDF("ORIGIN") =!= marketDF("DEST"))
-      .where(ticketsDF("ITIN_FARE") > minFare)
+      .where(marketDF("MARKET_FARE") > minFare)
+      .where(marketDF("MARKET_FARE") < 3500.00)
       .distinct()
   }
 
