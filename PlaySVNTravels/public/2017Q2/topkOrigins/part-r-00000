@@ -1,0 +1,102 @@
+[
+  {
+    "origin": "LAX",
+    "count": 288199
+  },
+  {
+    "origin": "SFO",
+    "count": 228446
+  },
+  {
+    "origin": "BOS",
+    "count": 214157
+  },
+  {
+    "origin": "SEA",
+    "count": 208049
+  },
+  {
+    "origin": "ORD",
+    "count": 208045
+  },
+  {
+    "origin": "DEN",
+    "count": 202178
+  },
+  {
+    "origin": "LAS",
+    "count": 198924
+  },
+  {
+    "origin": "MCO",
+    "count": 198730
+  },
+  {
+    "origin": "ATL",
+    "count": 198342
+  },
+  {
+    "origin": "LGA",
+    "count": 175159
+  },
+  {
+    "origin": "PHX",
+    "count": 166334
+  },
+  {
+    "origin": "EWR",
+    "count": 164244
+  },
+  {
+    "origin": "DFW",
+    "count": 163560
+  },
+  {
+    "origin": "DCA",
+    "count": 160197
+  },
+  {
+    "origin": "SAN",
+    "count": 158325
+  },
+  {
+    "origin": "MSP",
+    "count": 153098
+  },
+  {
+    "origin": "PHL",
+    "count": 145786
+  },
+  {
+    "origin": "DTW",
+    "count": 136559
+  },
+  {
+    "origin": "PDX",
+    "count": 133515
+  },
+  {
+    "origin": "FLL",
+    "count": 133256
+  },
+  {
+    "origin": "TPA",
+    "count": 128001
+  },
+  {
+    "origin": "IAH",
+    "count": 125564
+  },
+  {
+    "origin": "AUS",
+    "count": 122438
+  },
+  {
+    "origin": "BWI",
+    "count": 115014
+  },
+  {
+    "origin": "JFK",
+    "count": 114734
+  }
+]

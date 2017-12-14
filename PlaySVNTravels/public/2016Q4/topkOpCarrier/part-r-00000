@@ -1,0 +1,102 @@
+[
+  {
+    "opCarrier": "99",
+    "count": 2880402
+  },
+  {
+    "opCarrier": "WN",
+    "count": 1591895
+  },
+  {
+    "opCarrier": "DL",
+    "count": 1436606
+  },
+  {
+    "opCarrier": "AA",
+    "count": 1049208
+  },
+  {
+    "opCarrier": "UA",
+    "count": 726138
+  },
+  {
+    "opCarrier": "B6",
+    "count": 234363
+  },
+  {
+    "opCarrier": "OO",
+    "count": 203797
+  },
+  {
+    "opCarrier": "AS",
+    "count": 170480
+  },
+  {
+    "opCarrier": "NK",
+    "count": 123070
+  },
+  {
+    "opCarrier": "EV",
+    "count": 121344
+  },
+  {
+    "opCarrier": "YX",
+    "count": 103926
+  },
+  {
+    "opCarrier": "9E",
+    "count": 99234
+  },
+  {
+    "opCarrier": "OH",
+    "count": 85099
+  },
+  {
+    "opCarrier": "MQ",
+    "count": 84452
+  },
+  {
+    "opCarrier": "YV",
+    "count": 78625
+  },
+  {
+    "opCarrier": "HA",
+    "count": 67505
+  },
+  {
+    "opCarrier": "VX",
+    "count": 59585
+  },
+  {
+    "opCarrier": "F9",
+    "count": 56543
+  },
+  {
+    "opCarrier": "CP",
+    "count": 41736
+  },
+  {
+    "opCarrier": "QX",
+    "count": 41315
+  },
+  {
+    "opCarrier": "G7",
+    "count": 38082
+  },
+  {
+    "opCarrier": "ZW",
+    "count": 37946
+  },
+  {
+    "opCarrier": "S5",
+    "count": 30299
+  },
+  {
+    "opCarrier": "G4",
+    "count": 26961
+  },
+  {
+    "opCarrier": "SY",
+    "count": 18078
+  }
+]
