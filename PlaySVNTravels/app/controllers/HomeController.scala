@@ -22,7 +22,7 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit ec: Execution
    */
   def index = Action {
     val abc = Future{ new StreamingCheapFlights}
-    Ok(views.html.index(s"Your new application is ready. Your message:"))
+    Ok("ok")//views.html.index(s"Your new application is ready. Your message:"))
   }
 
 }

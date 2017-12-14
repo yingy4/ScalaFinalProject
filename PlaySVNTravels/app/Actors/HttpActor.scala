@@ -27,7 +27,7 @@ object HttpActor{
   * @param src the flight source
   * @param des the destination of the flight
   */
-//TODO:: remove print statements, introduce logging?
+
 class HttpActor(out:ActorRef)(src:String,des:String) extends Actor with ActorLogging{
 import HttpActor.system
 
