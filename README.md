@@ -8,7 +8,7 @@ In addition to the above analysis, we plan to provide a web UI which can act lik
 
 There are two Apps. The PlaySVNTravels app is a play application which does the real time flight processing and Spark Analysis application does the historical data analysis.
 
-To run PlaySVNTravels app you will need a Kafka and Zookeeper server running. For the Spark analysis application you will need the data set and HBase.
+To run PlaySVNTravels app you will need a Kafka and Zookeeper servers running. For the Spark analysis application you will need the data set and HBase.
 
 
 The PlaySVNTravels might throw an error while compile or build which relates to the "view.html.index", you can ignore that. That is just a bug with the IDE. To not get it again you can run the "sbt clean" followed by the "sbt compile" commands.
@@ -21,7 +21,7 @@ Steps to run PlaySVNTravels :
   3. Once all the servers are up, use a websocket client of your choice using a browser of your choice, connect to the              websocket and make a request.
   
   
-  Steps to Spark Analysis App:
+  Steps to run Spark Analysis App:
   1. Install Hbase
   2. Run the project with the dataset.
   
