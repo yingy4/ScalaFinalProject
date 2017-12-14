@@ -26,6 +26,8 @@ libraryDependencies ++= Seq("com.typesafe.akka" %% "akka-http" % "10.0.10"
                             ,"org.apache.hbase" % "hbase-common" % "1.0.0"
                             ,"org.apache.hbase" % "hbase-client" % "1.0.0"
                             ,"org.apache.hbase" % "hbase-server" % "1.0.0"
+                            ,"com.typesafe.akka" %% "akka-testkit" % "2.5.8"
+                            ,"com.typesafe.akka" %% "akka-http-testkit" % "10.0.11"
                             )
 
 dependencyOverrides += "com.google.guava" % "guava" % "15.0"
