@@ -2,10 +2,11 @@ package controllers
 
 import javax.inject._
 
-import Actors.{HttpActor, UserRequest}
+import Actors.HttpActor
 import akka.actor.ActorSystem
 import akka.stream.Materializer
 import akka.util.Timeout
+import play.api.Configuration
 import play.api.libs.streams.ActorFlow
 import play.api.libs.ws.WSClient
 import play.api.mvc._
@@ -24,14 +25,15 @@ import scala.concurrent.duration._
 
 @Singleton
 class APIController @Inject() (cc :ControllerComponents)
-      (ws: WSClient)(implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc){
+      (ws: WSClient) (config: Configuration) (implicit system: ActorSystem, mat: Materializer)  extends AbstractController(cc){
   import scala.concurrent.ExecutionContext.Implicits._
 
   implicit val timeout: Timeout = 5.seconds
   val url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search"
+  val apiKey = config.underlying.getString("amadeuskey")
 
   def cheapFlights (src: String, des: String) = Action.async {
-          ws.url(url).addQueryStringParameters("apikey" -> "Gbv5AzOeVWw2c0R3r2TBdA2SJA4kZkpB","origin" -> src,"destination" -> des, "departure_date" -> "2017-12-25")
+          ws.url(url).addQueryStringParameters("apikey" -> apiKey,"origin" -> src,"destination" -> des, "departure_date" -> "2017-12-25")
               .get()
               .map { response =>Ok(response.body)}
   }
