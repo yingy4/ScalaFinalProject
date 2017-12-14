@@ -3,7 +3,7 @@ package com.svntravel.hbase
 import com.svntravel.hbase.HbaseConf.{closeConnections, createConncetion, printRow}
 import com.svntravel.spark.analysis.{Location, LocationCarrierAgg}
 import org.apache.hadoop.hbase.TableName
-import org.apache.hadoop.hbase.client.{Get, Put, Table}
+import org.apache.hadoop.hbase.client.{Get, Put, Result, Table}
 import org.apache.hadoop.hbase.util.Bytes
 import org.apache.spark.sql.Dataset
 
@@ -31,13 +31,14 @@ object LocationsHbase {
 
   }
 
-  def getLocations (): Unit = {
+  def getLocations (srcDes: String): Result = {
     val conn  = createConncetion()
     val table = conn.getTable(TableName.valueOf( Bytes.toBytes("location")))
-    var get = new Get(Bytes.toBytes("IND - BHM"))
+    var get = new Get(Bytes.toBytes(srcDes))
     var result = table.get(get)
-    printRow(result)
+    //printRow(result)
     closeConnections(conn, table)
+    result
   }
 
   def addTopCarrierPerLocationtoHbase (dsl: Dataset[LocationCarrierAgg], cf: String): Unit = {

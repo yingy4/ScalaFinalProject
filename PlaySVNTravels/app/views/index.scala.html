@@ -4,13 +4,262 @@
  *@
 @(message: String)
 
+
 <!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <title>Index</title>
- </head>
- <body>
-   <p>@message</p>
+<html ng-app ="myApp">
+
+<head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+ <title>OneHuskyApp</title>
+
+ <!-- Latest compiled and minified CSS -->
+ <link rel="stylesheet"
+       href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+
+ <!-- Latest compiled JavaScript -->
+ <script script-src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ <script type="text/javascript" src="@routes.Assets.versioned("javascripts/angular.min.js")"></script>
+
+
+
+</head>
+
+<body>
+<div class="jumbotron text-center">
+ <h2>Flight Analysis</h2>
+ <h4>Adbms Final Project</h4>
+</div>
+
+<div class="container-fluid">
+ <h2>Analysis</h2>
+
+ <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#loc">Locations</a></li>
+  <li><a data-toggle="tab" href="#car">Carriers</a></li>
+ </ul>
+
+ <div class="tab-content">
+  <div id="loc" class="tab-pane fade in active" ng-controller="LocationsController">
+   <div>
+    <form>
+     <div class="form-row">
+      <div class="form-group col-md-6">
+       <label>Src</label>
+       <input type="text" class="form-control" placeholder="Src" ng-model="src" />
+      </div>
+      <div class="form-group col-md-6">
+       <label>Des</label>
+       <input type="text" class="form-control" placeholder="Des" ng-model="des" />
+      </div>
+     </div>
+     <div class="form-row text-center">
+      <button ng-click="getLocAgg()" class= "btn btn-primary">Go</button>
+     </div>
+    </form>
+   </div>
+   <div>
+    <h3 class="text-center">Location Agg</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>time</td>
+     <td>src</td>
+     <td>des</td>
+     <td>avgFare</td>
+     <td>minFare</td>
+     <td>maxFare</td>
+     <td>stdDev</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr>
+      <th scope="row">1</th>
+      <td>{{location.period}}</td>
+      <td>{{location.origin}}</td>
+      <td>{{location.destination}}</td>
+      <td>{{location.avgFare}}</td>
+      <td>{{location.minFare}}</td>
+      <td>{{location.maxFare}}</td>
+      <td>{{location.stdDev}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="container-fluid">
+    <div class="col-md-6 text-center">
+     <div id="locAvgC"></div>
+    </div>
+
+   </div>
+   <div>
+    <select ng-model="cf" ng-options="x for x in cfArray" ng-change="getTopLoc(cf)" > </select>
+   </div>
+   <div class="col-md-4">
+    <h3 class="text-center">Top Locations</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>Locations</td>
+     <td>count</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr ng-repeat= "location in topLocations | limitTo:limit">
+      <th scope="row">{{$index+1}}</th>
+      <td>{{location.srcDes}}</td>
+      <td>{{location.count}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="col-md-4">
+    <h3 class="text-center">Top Origins</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>Origin</td>
+     <td>count</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr ng-repeat= "origin in topOrigins | limitTo:limit">
+      <th scope="row">{{$index+1}}</th>
+      <td>{{origin.origin}}</td>
+      <td>{{origin.count}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="col-md-4">
+    <h3 class="text-center">Top Destinations</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>Destination</td>
+     <td>count</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr ng-repeat= "des in topDestinations | limitTo:limit">
+      <th scope="row">{{$index+1}}</th>
+      <td>{{des.destination}}</td>
+      <td>{{des.count}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+  <div id="car" class="tab-pane fade" ng-controller="CarriersController">
+   <div class="container-fluid">
+    <form>
+     <div class="form-row">
+      <div class="form-group col-md-6">
+       <label>CarrierCode</label>
+       <input type="text" class="form-control" placeholder="cc" ng-model="cc" />
+      </div>
+      <div class="col-md-6">
+       <br />
+       <button ng-click="getCarAgg()" class= "btn btn-primary">Go</button>
+      </div>
+     </div>
+    </form>
+   </div>
+   <div>
+    <h3 class="text-center">Carrier Agg</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>time</td>
+     <td>cc</td>
+     <td>avgFare</td>
+     <td>minFare</td>
+     <td>maxFare</td>
+     <td>sumFare</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr ng-repeat= "carrier in carrierArr">
+      <th scope="row">{{index}}</th>
+      <td>{{carrier.time}}</td>
+      <td>{{carrier.cc}}</td>
+      <td>{{carrier.avgFare}}</td>
+      <td>{{carrier.minFare}}</td>
+      <td>{{carrier.maxFare}}</td>
+      <td>{{carrier.sumFare}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <div>
+
+   </div>
+   <div>
+    <select ng-model="cf" ng-options="x for x in cfArray" ng-change="getTopCar(cf)" > </select>
+   </div>
+   <div class="col-md-4">
+    <h3 class="text-center">Top Operating Carriers</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>Carrier Code</td>
+     <td>count</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr ng-repeat= "op in topOpCar | limitTo:limit">
+      <th scope="row">{{$index+1}}</th>
+      <td>{{op.opCarrier}}</td>
+      <td>{{op.count}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="col-md-4">
+    <h3 class="text-center">Top Ticketing Carrier</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>Carrier Code</td>
+     <td>count</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr ng-repeat= "tkt in topTktCar | limitTo:limit">
+      <th scope="row">{{$index+1}}</th>
+      <td>{{tkt.tktCarrier}}</td>
+      <td>{{tkt.count}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="col-md-4">
+    <h3 class="text-center">Top Revenue Carrier</h3>
+    <table class="table table-bordered">
+     <thead class="thead-dark">
+     <th>
+     <td>Carrier Code</td>
+     <td>Revenue</td>
+     </th>
+     </thead>
+     <tbody>
+     <tr ng-repeat= "tkt in topTktRevCar | limitTo:limit">
+      <th scope="row">{{$index+1}}</th>
+      <td>{{tkt.tktCarrier}}</td>
+      <td>{{tkt.sum}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </div>
+</div>
+<script type="text/javascript" src="@routes.Assets.versioned("javascripts/index.js")"></script>
+
+
 </body>
+
 </html>
+
