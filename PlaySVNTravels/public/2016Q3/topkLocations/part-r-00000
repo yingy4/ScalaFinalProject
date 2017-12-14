@@ -1,0 +1,402 @@
+[
+  {
+    "srcDes": "\"LAX\"-\"JFK\"",
+    "count": 11766
+  },
+  {
+    "srcDes": "\"JFK\"-\"LAX\"",
+    "count": 11479
+  },
+  {
+    "srcDes": "\"EWR\"-\"SFO\"",
+    "count": 10169
+  },
+  {
+    "srcDes": "\"JFK\"-\"SFO\"",
+    "count": 10103
+  },
+  {
+    "srcDes": "\"BOS\"-\"SFO\"",
+    "count": 9969
+  },
+  {
+    "srcDes": "\"SFO\"-\"EWR\"",
+    "count": 9865
+  },
+  {
+    "srcDes": "\"SFO\"-\"BOS\"",
+    "count": 9827
+  },
+  {
+    "srcDes": "\"SFO\"-\"JFK\"",
+    "count": 9760
+  },
+  {
+    "srcDes": "\"BOS\"-\"LAX\"",
+    "count": 8928
+  },
+  {
+    "srcDes": "\"LAX\"-\"BOS\"",
+    "count": 8925
+  },
+  {
+    "srcDes": "\"LGA\"-\"ORD\"",
+    "count": 8834
+  },
+  {
+    "srcDes": "\"ORD\"-\"LGA\"",
+    "count": 8635
+  },
+  {
+    "srcDes": "\"EWR\"-\"LAX\"",
+    "count": 8491
+  },
+  {
+    "srcDes": "\"ORD\"-\"SFO\"",
+    "count": 8436
+  },
+  {
+    "srcDes": "\"LAX\"-\"EWR\"",
+    "count": 8351
+  },
+  {
+    "srcDes": "\"LGA\"-\"ATL\"",
+    "count": 8175
+  },
+  {
+    "srcDes": "\"SFO\"-\"ORD\"",
+    "count": 8144
+  },
+  {
+    "srcDes": "\"ATL\"-\"LGA\"",
+    "count": 8133
+  },
+  {
+    "srcDes": "\"ORD\"-\"LAX\"",
+    "count": 7959
+  },
+  {
+    "srcDes": "\"LAX\"-\"ORD\"",
+    "count": 7634
+  },
+  {
+    "srcDes": "\"SEA\"-\"LAX\"",
+    "count": 7558
+  },
+  {
+    "srcDes": "\"LAX\"-\"SEA\"",
+    "count": 7433
+  },
+  {
+    "srcDes": "\"LAX\"-\"PHL\"",
+    "count": 6916
+  },
+  {
+    "srcDes": "\"PHL\"-\"LAX\"",
+    "count": 6823
+  },
+  {
+    "srcDes": "\"LAX\"-\"ATL\"",
+    "count": 6487
+  },
+  {
+    "srcDes": "\"ATL\"-\"LAX\"",
+    "count": 6293
+  },
+  {
+    "srcDes": "\"MCO\"-\"LAX\"",
+    "count": 6270
+  },
+  {
+    "srcDes": "\"LAX\"-\"MCO\"",
+    "count": 6181
+  },
+  {
+    "srcDes": "\"ORD\"-\"EWR\"",
+    "count": 6139
+  },
+  {
+    "srcDes": "\"LAX\"-\"SFO\"",
+    "count": 6129
+  },
+  {
+    "srcDes": "\"SFO\"-\"LAX\"",
+    "count": 6088
+  },
+  {
+    "srcDes": "\"EWR\"-\"ORD\"",
+    "count": 6086
+  },
+  {
+    "srcDes": "\"BOS\"-\"DEN\"",
+    "count": 6024
+  },
+  {
+    "srcDes": "\"DFW\"-\"ORD\"",
+    "count": 5911
+  },
+  {
+    "srcDes": "\"ORD\"-\"DFW\"",
+    "count": 5875
+  },
+  {
+    "srcDes": "\"SFO\"-\"IAD\"",
+    "count": 5858
+  },
+  {
+    "srcDes": "\"DTW\"-\"LAX\"",
+    "count": 5817
+  },
+  {
+    "srcDes": "\"IAD\"-\"SFO\"",
+    "count": 5793
+  },
+  {
+    "srcDes": "\"LAX\"-\"DCA\"",
+    "count": 5785
+  },
+  {
+    "srcDes": "\"LAX\"-\"DTW\"",
+    "count": 5775
+  },
+  {
+    "srcDes": "\"LAX\"-\"HNL\"",
+    "count": 5769
+  },
+  {
+    "srcDes": "\"DCA\"-\"LAX\"",
+    "count": 5721
+  },
+  {
+    "srcDes": "\"DEN\"-\"BOS\"",
+    "count": 5718
+  },
+  {
+    "srcDes": "\"HNL\"-\"LAX\"",
+    "count": 5681
+  },
+  {
+    "srcDes": "\"LGA\"-\"DFW\"",
+    "count": 5596
+  },
+  {
+    "srcDes": "\"BWI\"-\"LAX\"",
+    "count": 5493
+  },
+  {
+    "srcDes": "\"LAX\"-\"BWI\"",
+    "count": 5478
+  },
+  {
+    "srcDes": "\"LAS\"-\"JFK\"",
+    "count": 5446
+  },
+  {
+    "srcDes": "\"BOS\"-\"ORD\"",
+    "count": 5429
+  },
+  {
+    "srcDes": "\"SEA\"-\"SFO\"",
+    "count": 5428
+  },
+  {
+    "srcDes": "\"LAS\"-\"EWR\"",
+    "count": 5416
+  },
+  {
+    "srcDes": "\"BOS\"-\"ATL\"",
+    "count": 5407
+  },
+  {
+    "srcDes": "\"DFW\"-\"LGA\"",
+    "count": 5399
+  },
+  {
+    "srcDes": "\"ATL\"-\"BOS\"",
+    "count": 5375
+  },
+  {
+    "srcDes": "\"LAX\"-\"IAD\"",
+    "count": 5366
+  },
+  {
+    "srcDes": "\"SFO\"-\"SEA\"",
+    "count": 5343
+  },
+  {
+    "srcDes": "\"PHL\"-\"SFO\"",
+    "count": 5287
+  },
+  {
+    "srcDes": "\"DFW\"-\"LAX\"",
+    "count": 5281
+  },
+  {
+    "srcDes": "\"SFO\"-\"PHL\"",
+    "count": 5276
+  },
+  {
+    "srcDes": "\"IAD\"-\"LAX\"",
+    "count": 5272
+  },
+  {
+    "srcDes": "\"LAX\"-\"DFW\"",
+    "count": 5200
+  },
+  {
+    "srcDes": "\"JFK\"-\"LAS\"",
+    "count": 5160
+  },
+  {
+    "srcDes": "\"BOS\"-\"SEA\"",
+    "count": 5118
+  },
+  {
+    "srcDes": "\"LAX\"-\"DEN\"",
+    "count": 5095
+  },
+  {
+    "srcDes": "\"SEA\"-\"BOS\"",
+    "count": 5094
+  },
+  {
+    "srcDes": "\"DEN\"-\"LAX\"",
+    "count": 5048
+  },
+  {
+    "srcDes": "\"EWR\"-\"LAS\"",
+    "count": 5031
+  },
+  {
+    "srcDes": "\"LAS\"-\"SFO\"",
+    "count": 5018
+  },
+  {
+    "srcDes": "\"ATL\"-\"ORD\"",
+    "count": 4993
+  },
+  {
+    "srcDes": "\"ORD\"-\"ATL\"",
+    "count": 4972
+  },
+  {
+    "srcDes": "\"LGA\"-\"MIA\"",
+    "count": 4951
+  },
+  {
+    "srcDes": "\"LGA\"-\"DEN\"",
+    "count": 4934
+  },
+  {
+    "srcDes": "\"LAS\"-\"BOS\"",
+    "count": 4900
+  },
+  {
+    "srcDes": "\"MIA\"-\"LGA\"",
+    "count": 4863
+  },
+  {
+    "srcDes": "\"SFO\"-\"ATL\"",
+    "count": 4856
+  },
+  {
+    "srcDes": "\"LAX\"-\"LGA\"",
+    "count": 4825
+  },
+  {
+    "srcDes": "\"ATL\"-\"SFO\"",
+    "count": 4808
+  },
+  {
+    "srcDes": "\"LGA\"-\"LAX\"",
+    "count": 4807
+  },
+  {
+    "srcDes": "\"DEN\"-\"LGA\"",
+    "count": 4784
+  },
+  {
+    "srcDes": "\"DCA\"-\"SFO\"",
+    "count": 4703
+  },
+  {
+    "srcDes": "\"SEA\"-\"JFK\"",
+    "count": 4675
+  },
+  {
+    "srcDes": "\"BOS\"-\"LAS\"",
+    "count": 4633
+  },
+  {
+    "srcDes": "\"LAX\"-\"MSP\"",
+    "count": 4613
+  },
+  {
+    "srcDes": "\"CLT\"-\"LGA\"",
+    "count": 4603
+  },
+  {
+    "srcDes": "\"SAN\"-\"SEA\"",
+    "count": 4585
+  },
+  {
+    "srcDes": "\"MSP\"-\"LAX\"",
+    "count": 4577
+  },
+  {
+    "srcDes": "\"ORD\"-\"PHL\"",
+    "count": 4566
+  },
+  {
+    "srcDes": "\"BOS\"-\"MCO\"",
+    "count": 4559
+  },
+  {
+    "srcDes": "\"SEA\"-\"SAN\"",
+    "count": 4558
+  },
+  {
+    "srcDes": "\"SFO\"-\"DCA\"",
+    "count": 4555
+  },
+  {
+    "srcDes": "\"DEN\"-\"SFO\"",
+    "count": 4537
+  },
+  {
+    "srcDes": "\"ORD\"-\"DCA\"",
+    "count": 4534
+  },
+  {
+    "srcDes": "\"SAN\"-\"BOS\"",
+    "count": 4504
+  },
+  {
+    "srcDes": "\"MCO\"-\"BOS\"",
+    "count": 4497
+  },
+  {
+    "srcDes": "\"BOS\"-\"SAN\"",
+    "count": 4486
+  },
+  {
+    "srcDes": "\"LAX\"-\"PDX\"",
+    "count": 4483
+  },
+  {
+    "srcDes": "\"SEA\"-\"ATL\"",
+    "count": 4463
+  },
+  {
+    "srcDes": "\"JFK\"-\"SEA\"",
+    "count": 4459
+  },
+  {
+    "srcDes": "\"SFO\"-\"DEN\"",
+    "count": 4445
+  },
+  {
+    "srcDes": "\"PHL\"-\"ORD\"",
+    "count": 4444
+  }
+]

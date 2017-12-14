@@ -53,6 +53,7 @@ object Aggregation {
       )
   }
 
+  //calculate aggregates for each carriers
   def carrierAggregates (ds: Dataset[Ticket]) : DataFrame = {
     ds.select("year", "quarter", "opCarrier", "fare")
       .groupBy("year", "quarter", "opCarrier")
@@ -64,6 +65,7 @@ object Aggregation {
       )
   }
 
+  //calculate the top carriers for each location
   def topCarrierPerLocation (ds: Dataset[Ticket]) : DataFrame = {
     ds.select("year", "quarter", "origin", "destination", "opCarrier", "fare")
         .groupBy("year", "quarter", "origin", "destination", "opCarrier")
